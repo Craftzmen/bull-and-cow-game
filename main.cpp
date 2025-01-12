@@ -1,11 +1,13 @@
 #include <iostream>
 #include "bullandcow.h"
 
+using namespace std;
+
 void printIntro();
 void playGame();
 bool playAgain();
 void printGameSummary();
-std::string getValidGuess();
+string getValidGuess();
 
 BullCowGame game;
 
@@ -28,30 +30,30 @@ int main()
 
 void printIntro()
 {
-    std::cout << "                                                  " << "\n";
-    std::cout << "               }   {         ___                  " << "\n";
-    std::cout << "               (o o)        (o o)                 " << "\n";
-    std::cout << "    /-------^-- \\ /          \\ /----^-------\\    " << "\n";
-    std::cout << "   / |  BULL   | o            o |   COW    | \\   " << "\n";
-    std::cout << "  *  |-,-------|                |----------|  *   " << "\n";
-    std::cout << "     ^         ^                ^          ^      " << "\n";
-    std::cout << "                                                  " << "\n";
-    std::cout << "WELCOME TO BULLS AND COWS, A FUN WORD GAME.\n";
-    std::cout << "Can you guess the " << game.getHiddenWordLength() << " letter isogram I'm thinking of?\n";
-    std::cout << "\n";
+    cout << "                                                  " << "\n";
+    cout << "               }   {         ___                  " << "\n";
+    cout << "               (o o)        (o o)                 " << "\n";
+    cout << "    /-------^-- \\ /          \\ /----^-------\\    " << "\n";
+    cout << "   / |  BULL   | o            o |   COW    | \\   " << "\n";
+    cout << "  *  |-,-------|                |----------|  *   " << "\n";
+    cout << "     ^         ^                ^          ^      " << "\n";
+    cout << "                                                  " << "\n";
+    cout << "WELCOME TO BULLS AND COWS, A FUN WORD GAME.\n";
+    cout << "Can you guess the " << game.getHiddenWordLength() << " letter isogram I'm thinking of?\n";
+    cout << "\n";
 }
 
-std::string getValidGuess()
+string getValidGuess()
 {
     GuessStatus status = GuessStatus::InvalidStatus;
-    std::string result = "";
+    string result = "";
 
     do {
         int currentTries = game.getCurrentTry();
-        std::string guess = "";
+        string guess = "";
 
-        std::cout << "Try " << currentTries << " of " << game.getMaxTries() << " Enter your guess: ";
-        std::getline(std::cin, guess);
+        cout << "Try " << currentTries << " of " << game.getMaxTries() << " Enter your guess: ";
+        getline(cin, guess);
 
         status = game.checkGuessValidity(guess);
 
@@ -59,16 +61,16 @@ std::string getValidGuess()
         case GuessStatus::OK:
             return guess;
         case GuessStatus::NotIsogram:
-            std::cout << "Please enter a word without repeating letters.\n\n";
+            cout << "Please enter a word without repeating letters.\n\n";
             break;
         case GuessStatus::WrongLength:
-            std::cout << "Please enter a " << game.getHiddenWordLength() << " letter word.\n\n";
+            cout << "Please enter a " << game.getHiddenWordLength() << " letter word.\n\n";
             break;
         case GuessStatus::NotLowercase:
-            std::cout << "Please enter all lowercase letters.\n\n";
+            cout << "Please enter all lowercase letters.\n\n";
             break;
         default:
-            std::cout << "Invalid guess. Please try again.\n\n";
+            cout << "Invalid guess. Please try again.\n\n";
             break;
         }
 
@@ -80,9 +82,9 @@ std::string getValidGuess()
 void printGameSummary()
 {
     if (game.isGameWon()) {
-        std::cout << "WELL DONE! - YOU WIN!\n";
+        cout << "WELL DONE! - YOU WIN!\n";
     } else {
-        std::cout << "Better luck next time!\n";
+        cout << "Better luck next time!\n";
     }
 }
 
@@ -92,10 +94,10 @@ void playGame()
     int maxTries = game.getMaxTries();
 
     while (!game.isGameWon() && game.getCurrentTry() <= maxTries) {
-        std::string guess = getValidGuess();
+        string guess = getValidGuess();
         BullCowCount bullCowCount = game.submitValidGuess(guess);
 
-        std::cout << "Bulls = " << bullCowCount.bulls << ", Cows = " << bullCowCount.cows << "\n\n";
+        cout << "Bulls = " << bullCowCount.bulls << ", Cows = " << bullCowCount.cows << "\n\n";
     }
 
     printGameSummary();
@@ -103,9 +105,9 @@ void playGame()
 
 bool playAgain()
 {
-    std::cout << "Do you want to play again with a new hidden word? (y/n): ";
-    std::string response;
-    std::getline(std::cin, response);
+    cout << "Do you want to play again with a new hidden word? (y/n): ";
+    string response;
+    getline(cin, response);
 
     return (response[0] == 'y' || response[0] == 'Y');
 }
