@@ -1,4 +1,4 @@
-Cannot generate into /Users/mac/CLionProjects/Semester-Project
-It was created with incompatible generator 'Unix Makefiles'
+Cannot generate into /Users/mac/CLionProjects/Bulls-and-Cows
+It is already used for project /Users/mac/CLionProjects/Semester-Project
 
 Please either delete it manually or select another generation directory
